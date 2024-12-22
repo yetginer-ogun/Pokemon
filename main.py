@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
 from config import token
-from logic import Pokemon
+from logic import *
+import random
 
 intents = discord.Intents.default()  
 intents.messages = True              
@@ -16,12 +17,20 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'Giriş yapıldı:  {bot.user.name}')  
 
-# '!go' komutu
+
 @bot.command()
 async def go(ctx):
     author = ctx.author.name  
     if author not in Pokemon.pokemons.keys():
-        pokemon = Pokemon(author)  
+        sinif = random.randint(1,3)
+        if sinif == 1:
+            pokemon = Pokemon(author)  
+        elif sinif == 2:
+            pokemon = Warrior(author)
+        elif sinif == 3:
+            pokemon = Mage(author)
+        else:
+            pokemon = Pokemon(author)
         await ctx.send(await pokemon.info())  
         image_url = await pokemon.show_img() 
         if image_url:
@@ -32,5 +41,6 @@ async def go(ctx):
             await ctx.send("Pokémonun görüntüsü yüklenemedi!")
     else:
         await ctx.send("Zaten kendi Pokémonunuzu oluşturdunuz!")  
+
 
 bot.run(token)

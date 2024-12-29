@@ -31,7 +31,7 @@ class Pokemon:
             async with session.get(url) as response:  
                 if response.status == 200:
                     data = await response.json()  
-                    return data['stats'][0]['base_stat']  
+                    return data['stats'][0]['base_stat']  * 3
                 else:
                     return 0  
                 

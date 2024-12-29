@@ -84,10 +84,7 @@ class Warrior(Pokemon):
     
 
 class Mage(Pokemon):
-    async def saldir(self, enemy):
-        
-        else:
-            return await super().saldir(enemy)
+    pass
 
 if __name__ == "__main__":
     async def deneme():

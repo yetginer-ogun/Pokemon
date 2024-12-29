@@ -63,6 +63,10 @@ class Pokemon:
                     return None
                 
     async def saldir(self, enemy):
+        if isinstance(enemy, Mage):
+            kalkan = random.randint(1,5)
+            if kalkan == 1:
+                return f"{self.name}, {enemy.name}'in kalkanını kıramadı.{enemy.name} hasar almadı"
         if enemy.hp > self.attack:
             enemy.hp -= self.attack
             return f"{self.name}, {enemy.name}'a saldırdı. {self.attack} hasar verdi.\n{enemy.name}'in kalan canı: {enemy.hp}"
@@ -81,9 +85,7 @@ class Warrior(Pokemon):
 
 class Mage(Pokemon):
     async def saldir(self, enemy):
-        kalkan = random.randint(1,2)
-        if kalkan == 1:
-            return f"{self.name}, {enemy.name}'in kalkanını kıramadı.{enemy.name} hasar almadı"
+        
         else:
             return await super().saldir(enemy)
 
